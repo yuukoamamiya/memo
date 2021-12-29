@@ -1,4 +1,0 @@
-{
-    "schedule": "weekly", 
-    "aggressiveCompression": "false", // true|false
-}
