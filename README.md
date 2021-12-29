@@ -2,4 +2,4 @@
 
 摘抄通过[Web Clipper](https://github.com/webclipper/web-clipper)实现。
 
-最后通过[docute](https://github.com/egoist/docute)呈现为网页。
+最后通过gitbook呈现为网页，直接抄了[这个作业](https://wangzhebufangqi.github.io/auto-export-gitbook/)。
