@@ -18,6 +18,7 @@
 		"-search", 
 		"search-pro",
 		"splitter"
+		"disqus"
 	],
 	"pluginsConfig": {	
 		"page-footer-ex": {
@@ -29,6 +30,9 @@
 		"prism": {
 			"css": ["prismjs/themes/prism-solarizedlight.css"],
 			"lang": {"flow": "typescript"}
+		},
+		"disqus": {
+			"shortName": "yukoamamiya"
 		}
 	},
 	"ignores" : ["_book", "node_modules"]
