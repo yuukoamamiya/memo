@@ -1,5 +1,5 @@
-site_name: Reticence Ji's Notes
-site_url: https://reticenceji.github.io
+site_name: 愚公柚子的网页剪报
+site_url: https://memo.amamiyayuuko.com
 theme:
   name: material
   custom_dir: overrides
@@ -36,16 +36,16 @@ theme:
   language: zh
   icon:
     repo: fontawesome/brands/github
-  favicon: static/favicon.png
+  favicon: https://img.amamiyayuuko.com/20210127185955.ico
 plugins:
   - search
   - tags
   - social
   - meta-descriptions
-  - blog:
-      blog_dir: 随笔
-      blog_toc: true
-      draft_on_serve: false
+#  - blog:
+#      blog_dir: 随笔
+#      blog_toc: true
+#      draft_on_serve: false
 extra_javascript:
   - https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/mathjax/3.2.0/es5/tex-mml-chtml.js
   - javascripts/extra.js
@@ -64,18 +64,18 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
 
-repo_url: https://github.com/reticenceji/reticenceji.github.io  
-repo_name: reticenceji/reticenceji.github.io
+repo_url: https://github.com/yuukoamamiya/memo  
+repo_name: yuukoamamiya/memo
 
 # 添加社交链接
 extra:
   social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/reticenceji
-      name: Reticence Ji on GitHub
-    - icon: fontawesome/brands/linkedin
-      link: https://linkedin.com/in/reticenceji
-      name: Reticence Ji on LinkedIn
+#    - icon: fontawesome/brands/github
+#      link: https://github.com/reticenceji
+#      name: Reticence Ji on GitHub
+#    - icon: fontawesome/brands/linkedin
+#      link: https://linkedin.com/in/reticenceji
+#      name: Reticence Ji on LinkedIn
 
 # 如果部署到子目录，需要设置
 site_dir: site
