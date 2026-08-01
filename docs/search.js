@@ -158,6 +158,13 @@
   }
 
   window.SearchPlugin = function (hook, vm) {
+    hook.afterEach(function (html) {
+      return html.replace(
+        /<img(?![^>]*loading=)/gi,
+        '<img loading="lazy" decoding="async"'
+      )
+    })
+
     hook.ready(function () {
       var base = vm.config.basePath || '/'
       indexUrl = base.replace(/\/$/, '') + '/' + INDEX_URL
