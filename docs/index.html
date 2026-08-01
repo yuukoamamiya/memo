@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>愚公柚子的网页剪报</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-darklight-theme@3.2.0/dist/style.min.css">
+  <link rel="stylesheet" href="assets/theme.css">
+  <link rel="stylesheet" href="assets/site.css">
   <style>
     .search-box { padding: 16px 16px 0; }
     .search-box input {
@@ -34,12 +35,15 @@
       maxLevel: 4,
       themeColor: '#42b983',
       darklightTheme: {
-        siteFont: '"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif'
+        siteFont: '"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif',
+        bodyFontSize: '17.5px',
+        dark: { toogleImage: 'url(/assets/moon.svg)' },
+        light: { toogleImage: 'url(/assets/sun.svg)' }
       },
       plugins: [window.SearchPlugin]
     };
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify-darklight-theme@3.2.0/dist/index.min.js"></script>
+  <script src="assets/docsify.min.js"></script>
+  <script src="assets/darklight.min.js"></script>
 </body>
 </html>

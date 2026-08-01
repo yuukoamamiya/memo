@@ -1,0 +1,9 @@
+/* Reading-friendly overrides, inspired by bestmotherfucking.website */
+.markdown-section { max-width: 44em; }
+.markdown-section p,
+.markdown-section li { line-height: 1.75; }
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4 { line-height: 1.3; }
+.markdown-section em { color: var(--textColor); }

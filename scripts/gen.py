@@ -10,6 +10,7 @@ Outputs (into docs/, both gitignored):
 
 Pure standard library, so it runs in CI with no pip dependencies.
 """
+import hashlib
 import json
 import os
 import re
@@ -140,22 +141,28 @@ def build_sidebar(entries):
 
 
 def build_index(entries):
-    index = []
-    for name, _ in SECTIONS:
-        for rel, path in entries[name]:
-            index.append({"path": rel, "title": display_title(path), "text": plain_text(path)})
-    return index
+    return [
+        {"path": rel, "title": display_title(path), "text": plain_text(path)}
+        for name, _ in SECTIONS
+        for rel, path in entries[name]
+    ]
 
 
 def main():
     entries = collect()
     with open(os.path.join(DOCS, "_sidebar.md"), "w", encoding="utf-8") as f:
         f.write(build_sidebar(entries))
+
+    index = {"version": "", "docs": build_index(entries)}
+    blob = json.dumps(index, ensure_ascii=False, separators=(",", ":"))
+    index["version"] = hashlib.sha256(blob.encode("utf-8")).hexdigest()[:16]
     with open(os.path.join(DOCS, "search-index.json"), "w", encoding="utf-8") as f:
-        json.dump(build_index(entries), f, ensure_ascii=False, separators=(",", ":"))
+        json.dump(index, f, ensure_ascii=False, separators=(",", ":"))
+
     total = sum(len(v) for v in entries.values())
     size = os.path.getsize(os.path.join(DOCS, "search-index.json"))
-    print(f"generated {total} docs -> docs/_sidebar.md, docs/search-index.json ({size / 1024 / 1024:.2f} MB)")
+    print(f"generated {total} docs -> docs/_sidebar.md, docs/search-index.json "
+          f"(v{index['version']}, {size / 1024 / 1024:.2f} MB)")
 
 
 if __name__ == "__main__":
