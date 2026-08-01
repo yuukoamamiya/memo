@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>愚公柚子的网页剪报</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-darklight-theme@3.2.0/dist/style.min.css">
+  <style>
+    .search-box { padding: 16px 16px 0; }
+    .search-box input {
+      width: 100%; box-sizing: border-box; padding: 8px 12px;
+      border: 1px solid var(--borderColor, #ddd); border-radius: 15px;
+      background-color: var(--background, #fff); color: var(--textColor, #333);
+      font-size: 14px; outline: none;
+    }
+    .search-results { margin-top: 8px; max-height: 320px; overflow-y: auto; }
+    .search-result { display: block; padding: 8px 6px; border-bottom: 1px solid var(--borderColor, #eee); }
+    .search-result-title { font-size: 14px; font-weight: 600; color: var(--accent, #42b983); }
+    .search-result-snippet {
+      font-size: 12px; color: var(--sidebarSublink, #888); margin-top: 2px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">加载中…</div>
+  <script src="search.js"></script>
+  <script>
+    window.$docsify = {
+      name: '愚公柚子的网页剪报',
+      repo: 'yuukoamamiya/memo',
+      loadSidebar: true,
+      subMaxLevel: 2,
+      maxLevel: 4,
+      themeColor: '#42b983',
+      darklightTheme: {
+        siteFont: '"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif'
+      },
+      plugins: [window.SearchPlugin]
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-darklight-theme@3.2.0/dist/index.min.js"></script>
+</body>
+</html>

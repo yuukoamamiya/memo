@@ -1,4 +1,4 @@
-.cache
-site
 docs/.obsidian
 **/.DS_Store
+docs/_sidebar.md
+docs/search-index.json
