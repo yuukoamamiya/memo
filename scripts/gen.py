@@ -40,11 +40,15 @@ def read(path):
         return f.read()
 
 
-FORMAT_CHARS = re.compile(r"[*_`<>\[\]|=]")  # markdown-ish chars -> distrust as title
+TRAILING_DOTS = re.compile(r"\.+$")
+CIRCLE_SUFFIX = re.compile(
+    r"\s*-\s*(?:哔哩哔哩\s*-\s*)?Circle\s*阅读助手$|\s*-\s*哔哩哔哩$"
+)
+ESC_PIPE = re.compile(r"\\\|")  # Circle escapes a literal pipe in headings
 
 
-def title_of(path):
-    """First heading (ATX / setext / whole-line link); else first clean line; else filename."""
+def first_heading(path):
+    """First real heading (ATX / setext / whole-line link) in the doc, or None."""
     lines = read(path).splitlines()
     for i, line in enumerate(lines):
         s = line.strip()
@@ -59,10 +63,33 @@ def title_of(path):
         is_setext = i + 1 < len(lines) and re.match(r"^={3,}$", lines[i + 1].strip())
         if is_atx or is_setext or m:
             return s
-        if not FORMAT_CHARS.search(s) and len(s) <= 60:
-            return s
-        return os.path.splitext(os.path.basename(path))[0]
-    return os.path.splitext(os.path.basename(path))[0]
+    return None
+
+
+def display_title(path):
+    """Article title for the sidebar / search index.
+
+    The filename is Circle-generated from the real article title and is the most
+    reliable source (the first line in the doc can be Circle's own wrapper, e.g.
+    "[译者序](bilibili...)" or the source-page title for Zhihu exports).
+    Only when Circle truncated the filename (ends with "...") do we fall back to
+    the first real heading inside the doc.
+    """
+    stem = os.path.splitext(os.path.basename(path))[0]
+
+    file_title = CIRCLE_SUFFIX.sub("", stem)
+    file_title = TRAILING_DOTS.sub("", file_title)
+    file_title = file_title.replace("_", " ")
+    file_title = WS.sub(" ", file_title).strip()
+
+    if TRAILING_DOTS.search(stem):
+        doc = first_heading(path)
+        if doc:
+            doc = ESC_PIPE.sub("|", doc)
+            doc = TRAILING_DOTS.sub("", doc).strip()
+            if doc:
+                return doc
+    return file_title
 
 
 def plain_text(path):
@@ -106,7 +133,7 @@ def build_sidebar(entries):
             continue
         lines.append(f"- **{label}**")
         for rel, path in items:
-            title = title_of(path)
+            title = display_title(path)
             href = quote_href(rel[:-3])  # strip .md; docsify appends it back
             lines.append(f"  - [{title}]({href})")
     return "\n".join(lines) + "\n"
@@ -116,7 +143,7 @@ def build_index(entries):
     index = []
     for name, _ in SECTIONS:
         for rel, path in entries[name]:
-            index.append({"path": rel, "title": title_of(path), "text": plain_text(path)})
+            index.append({"path": rel, "title": display_title(path), "text": plain_text(path)})
     return index
 
 
